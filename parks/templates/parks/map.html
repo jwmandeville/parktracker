@@ -1,0 +1,85 @@
+<html lang="en">
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" media="all" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <script src="{% static "parks/jquery-1.11.3.js" %}"></script>
+        <script src="{% static "parks/jquery.tablesorter.js" %}"></script>
+    <link rel="stylesheet" type="text/css" media="all" />
+    <style>
+        html, body { height: 100%; margin: 0; padding: 0; }
+        #map { height: 100%; }
+    </style>
+    <div id="map"></div>
+    <script type="text/javascript">
+        var vancouver_center = {lat: 49.261127,lng: -123.113949};
+
+        var parks = [
+        {% for park in list_of_parks %}
+            ['<a id="parkname" href="{% url 'parks:detail' park.park_id %}">{{park.name }}</a>', {{ park.lat }},
+                {{ park.long }}],
+        {% endfor%}
+        ];
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: vancouver_center,
+                zoom: 12
+            });
+
+            var infoWindow = new google.maps.InfoWindow({map: map});
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('You Are Here!');
+                    map.setCenter(pos);
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+
+            var i;
+            var infowindow = new google.maps.InfoWindow();
+
+            var bounds = new google.maps.LatLngBounds();
+            for (i = 0; i < parks.length; i++) {
+                var pos = new google.maps.LatLng(parks[i][1], parks[i][2]);
+                bounds.extend(pos);
+                marker = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                    title: parks[i][0]
+                });
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infowindow.setContent(parks[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+                map.fitBounds(bounds);
+            }
+        }
+
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                    'Error: The Geolocation service failed.' :
+                    'Error: Your browser doesn\'t support geolocation.');
+        }
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4uq9CCF20teF867sasUjYey3-xu0aH4o&callback=initMap">
+    </script>
+</html>

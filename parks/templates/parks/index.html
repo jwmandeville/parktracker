@@ -1,0 +1,64 @@
+<head>
+    {% load staticfiles %}
+    <title>Parktracker Index</title>
+    <link rel="stylesheet" type="text/css" media="all" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+
+    <script src="{% static "parks/jquery-1.11.3.js" %}"></script>
+    <script src="{% static "parks/jquery.tablesorter.js" %}"></script>
+    <link rel="stylesheet" type="text/css" media="all" />
+</head>
+
+{% include "parks/nav.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<body>
+        <div id="selectedsort" class="none"></div>
+        <div class="filters">
+            {% include "parks/filters.html" %}
+        </div>
+        {% if list_of_parks %}
+        <div class="parks" id="list_view">
+                {% include "parks/list.html" %}
+        </div>
+        <div id="map_view">
+                {% include "parks/map.html" %}
+        </div>
+        {% if map_select != 'true' %}
+        <script>
+            $(document).ready(function() {
+                $("#map_view").hide();
+                $("#apply_map_filters").hide();
+            });
+        </script>
+        {% else %}
+        <script>
+            $(document).ready(function() {
+                $("#list_view").hide();
+                $("#apply_filters").hide();
+            });
+        </script>
+        {% endif %}
+        <script>
+            $(document).ready(function(){
+                $("#mapcontainer").click(function(){
+                    $("#list_view").hide();
+                    $("#map_view").show();
+                    $("#apply_filters").hide();
+                    $("#apply_map_filters").show();
+                    initMap();
+                });
+                $("#listcontainer").click(function(){
+                    $("#list_view").show();
+                    $("#map_view").hide();
+                    $("#apply_map_filters").hide();
+                    $("#apply_filters").show();
+                });
+            });
+        </script>
+    {% else %}
+        <p style="margin-top:50px;">No parks are available.</p>
+    {% endif %}
+</body>
+{% endblock %}

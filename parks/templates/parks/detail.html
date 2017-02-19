@@ -1,0 +1,323 @@
+{% include "parks/base.html" %}
+{% load staticfiles %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- jQuery -->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <title>{{ park.name }}</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static "css/portfolio-item.css" %}">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <!-- CSS style -->
+    <link rel="stylesheet" type="text/css" media="all" href="{% static "css/style.css" %}">
+
+</head>
+
+<body>
+
+<!-- Facebook SDK -->
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '522365461271197',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v2.5'
+
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ park.name }}</h1> <h3><small>{{ park.neighbourhood }}</small></h3>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-md-6">
+            {#                <img class="img-responsive" src="http://placehold.it/750x500" alt="">#}
+            <img class="img-responsive" src="{{ park.image_url }}"/>
+        </div>
+        <div>
+            <script>
+                window.onload=function(){
+                    var favorite_parks_list = '{{ request.user.user_profile.favorite_park }}';
+                    var favorite_parks = favorite_parks_list.split(",");
+                    if(favorite_parks.indexOf(';{{ park.park_id }};') >= 0) {
+                        document.getElementById("favorite_form").style.display='none';
+                    }
+                    else {
+                        document.getElementById("unfavorite_form").style.display='none';
+
+                    }
+                }
+            </script>
+            <div id="detail_btns">
+                <form action="{% url 'parks:unfavorite' park.park_id %}" method="POST" id="unfavorite_form">
+                             {% csrf_token %}
+                    <input type="submit" class="btn" value="Unfavorite">
+                </form>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                            $('#unfavorite_form').on('submit', function (e) {
+                            document.getElementById("favorite_form").style.display='block';
+                            document.getElementById("unfavorite_form").style.display='none';
+                        });
+                    });
+                </script>
+                <form action="{% url 'parks:favorite' park.park_id %}" method="POST" id="favorite_form">
+                    {% csrf_token %}
+                    <input class="btn" type="submit" value="Favorite This Park">
+                </form>
+                &nbsp;&nbsp;&nbsp;
+                <form>
+                    <input type="button" class="btn" value="Check-In" name="check_in_button" id="check_in_button">
+                </form>
+                &nbsp;&nbsp;&nbsp;
+                <form>
+                    <input type="submit" class="btn" value="Share" name="share_button" id="share_button">
+                </form>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('#favorite_form').on('submit', function (e) {
+                        document.getElementById("favorite_form").style.display='none';
+                        document.getElementById("unfavorite_form").style.display='block';
+                    });
+                });
+            </script>
+        </div>
+            <div class="col-md-6">
+                <em>Park ID: {{ park.park_id }}</em>
+                <h4>Size: <small>{{ park.size }} Hectares</small></h4>
+                <h4>Address: <small>{{ park.address }}</small></h4>
+                <!-- <h4>Rating <small>{{ park.rating }}</small> </h4> -->
+                <h4>Washrooms: <small>{% if park.washroom == 0 %}None{% else %}Yes{% endif %}</small> </h4>
+                <h4>Official Park: <small>{% if park.official == 0 %}No{% else %}Yes{% endif %}</small></h4>
+                <h4>Special: <small> {% if park.special == 0 %}No{% else %}Yes{% endif %} </small></h4>
+                <h4>Advisory: <small>{% if park.advisory == 0 %}None{% else %}Yes{% endif %} </small></h4>
+
+                <!-- RATING -->
+                <p class="none" id="{{ park.park_id }}invrating">{{ park.rating }}</p>
+                <div id="{{ park.park_id }}ratingcont" class="ratingcontainer">
+
+                    <p id="start" class="none">{{ park.park_id }}</p>
+                    <p class="ratingtext"></p>
+                    <button id="half" action="/put_rating/" method="PUT" class="put-rating half one">
+
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">0.5</p>
+
+
+                    </button>
+
+                    <button id="one" action="/put_rating/" method="PUT" class="put-rating full one">
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">1</p>
+
+                    </button>
+
+                    <button id="onehalf" action="/put_rating/" method="PUT" class="put-rating half two">
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">1.5</p>
+
+                    </button>
+
+                    <button id="two" action="/put_rating/" method="PUT" class="put-rating full two">
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">2</p>
+
+                    </button>
+
+                    <button id="twohalf" action="/put_rating/" method="PUT" class="put-rating half three">
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">2.5</p>
+
+                    </button>
+
+                    <button id="three" action="/put_rating/" method="PUT" class="put-rating full three">
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">3</p>
+
+                    </button>
+
+                    <button id="threehalf" action="/put_rating/" method="PUT" class="put-rating half four">
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">3.5</p>
+
+                    </button>
+
+                    <button id="four" action="/put_rating/" method="PUT" class="put-rating full four">
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">4</p>
+
+                    </button>
+
+                    <button id="fourhalf" action="/put_rating/" method="PUT" class="put-rating half five">
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">4.5</p>
+
+                    </button>
+
+                    <button id="five" action="/put_rating/" method="PUT" class="put-rating full five">
+                        <p class="none">{{ park.park_id }}</p>
+                        <p class="none">5</p>
+
+                    </button>
+                    <p class="none" id = "end"></p>
+                </div> <br><br>
+
+
+                <h4>Coordinates: <small>{{ park.lat }}, {{ park.long }}</small></h4>
+                <h4><a href="{{ park.nurl }}"><small> Neighbourhood website </small></a></h4>
+                <h4>Reported problems: <small>{{ park.problems }}</small></h4>
+                {% if user.is_authenticated %}
+                <h4>Did you notice a problem with the park? Please type a description of the problem here.</h4>
+                <form action="{% url 'parks:problem' park.park_id %}" method="POST" id="problem-form">
+                    {% csrf_token %}
+                    <input type="text" maxlength="150" name="description">
+                    <input class="btn" type="submit" value="Submit">
+                </form>
+                <script>
+                    $(document).ready(function () {
+                        $('#problem-form').on('submit', function (event) {
+                            //event.preventDefault();
+                            //var text = $('#problem').val();
+                            var mytext = $("input[name='description']").val();
+                            //submit_problem();
+                        });
+                    });
+                </script>
+            {% endif %}
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        </div>
+    </div>
+    <!-- /.row -->
+    <div>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#share_button').click(function(e){
+                    e.preventDefault();
+                    FB.ui({
+                        method: 'feed',
+                        link: '{{ park.nurl }}',
+                        caption: 'Park',
+                    }, function(response){
+                    });
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#check_in_button').click(function(e){
+                    e.preventDefault();
+                    FB.login(function(){
+                        FB.api('/search', 'get',
+                                {   q: '{{ park.name }}',
+                                    type: 'place',
+                                },
+                                function (response){
+                                    FB.api('/me/feed', 'post',
+                                            {
+                                                place: response.data[0].id,
+                                            },
+                                            function (response){
+                                            }
+                                    );
+                                }
+                        );
+                    }, {scope: 'publish_actions'});
+                });
+            });
+        </script>
+    </div>
+    <!-- Other Parks in Neighbourhood Row -->
+
+
+    <!-- Portfolio Item Row -->
+            <div class="col-lg-12">
+                <h3 class="page-header">Nearby Parks </h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="{% url 'parks:detail' park.nearest1_id %}">
+                    <img class="img-responsive portfolio-item" src="{{ park.nearest1_image }}"
+                         alt="http://placehold.it/500x300"></a>
+                <a href="{% url 'parks:detail' park.nearest1_id %}"><h4>{{ park.nearest1_name }}</h4></a>
+                <h4><small><i>{{ park.nearest1_distance }} km away </i></small></h4>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="{% url 'parks:detail' park.nearest2_id %}">
+                    <img class="img-responsive portfolio-item" src="{{ park.nearest2_image }}"
+                         alt="http://placehold.it/500x300"></a>
+                <a href="{% url 'parks:detail' park.nearest2_id %}"><h4>{{ park.nearest2_name }}</h4></a>
+                <h4><small><i>{{ park.nearest2_distance }} km away </i></small></h4>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="{% url 'parks:detail' park.nearest3_id %}">
+                    <img class="img-responsive portfolio-item" src="{{ park.nearest3_image }}"
+                         alt="http://placehold.it/500x300"></a>
+                <a href="{% url 'parks:detail' park.nearest3_id %}"><h4>{{ park.nearest3_name }}</h4></a>
+                <h4><small><i>{{ park.nearest3_distance }} km away </i></small></h4>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+               <a href="{% url 'parks:detail' park.nearest4_id %}">
+                    <img class="img-responsive portfolio-item" src="{{ park.nearest4_image }}"
+                         alt="http://placehold.it/500x300"></a>
+                <a href="{% url 'parks:detail' park.nearest4_id %}"><h4>{{ park.nearest4_name }}</h4></a>
+                <h4><small><i>{{ park.nearest4_distance }} km away </i></small></h4>
+            </div>
+        </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <div
+            class="fb-like"
+            data-share="true"
+            data-width="450"
+            data-show-faces="true">
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; ParkTracker 2015</p>
+            </div>
+        </div>
+        <!-- /.row -->
+    </footer>
+
+</div>
+</body>

@@ -1,0 +1,174 @@
+{#<div class="filters">#}
+{% load staticfiles %}
+
+    <p class="headerfiltertext">FILTERS</p>
+    {% if user.is_authenticated %}
+    <label class="Checkbox">
+        <input name="chkbox" id="ad_Checkbox0" class="ads_Checkbox" type="checkbox" {% if favorite == 'true' %}checked{% endif %} value="favorite"/>
+        <span class="spanbox"></span>
+    </label>
+    <label class="namelabel" for="chkbox">Favorites</label>
+    {% endif %}
+    <label class="Checkbox">
+        <input name="chkbox" id="ad_Checkbox1" class="ads_Checkbox" type="checkbox" {% if washroom == 'true' %}checked{% endif %} value="washroom"/>
+        <span class="spanbox"></span>
+    </label>
+    <label class="namelabel" for="chkbox">Washroom</label><br><br>
+    <span class="nbhfiltertext">Neighbourhood</span>
+    <p>
+
+        <label class="Checkbox">
+            <input name="chkbox" id="ad_Checkbox2" class="ads_Checkbox" type="checkbox" {% if arbutus_ridge != 'false' %}checked{% endif %} value="arbutus_ridge"/>
+            <span class="spanbox"></span>
+        </label>
+        <label class="namelabel" for="chkbox">Arbutus Ridge</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox3" class="ads_Checkbox" type="checkbox" {% if downtown != 'false' %}checked{% endif %} value="downtown"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Downtown</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox4" class="ads_Checkbox" type="checkbox" {% if west_end != 'false' %}checked{% endif %} value="west_end"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">West End</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox5" class="ads_Checkbox" type="checkbox" {% if dunbar_southlands != 'false' %}checked{% endif %} value="dunbar_southlands"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Dunbar-Southlands</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox6" class="ads_Checkbox" type="checkbox" {% if fairview != 'false' %}checked{% endif %} value="fairview"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Fairview</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox7" class="ads_Checkbox" type="checkbox" {% if grandview_woodland != 'false' %}checked{% endif %} value="grandview_woodland"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Grandview-Woodland</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox8" class="ads_Checkbox" type="checkbox" {% if hastings_sunrise != 'false' %}checked{% endif %} value="hastings_sunrise"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Hastings-Sunrise</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox9" class="ads_Checkbox" type="checkbox" {% if kensington_cedar_cottage != 'false' %}checked{% endif %} value="kensington_cedar_cottage"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Kensington-Cedar Cottage</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox10" class="ads_Checkbox" type="checkbox" {% if kerrisdale != 'false' %}checked{% endif %} value="kerrisdale"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Kerrisdale</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox11" class="ads_Checkbox" type="checkbox" {% if killarney != 'false' %}checked{% endif %} value="killarney"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Killarney</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox12" class="ads_Checkbox" type="checkbox" {% if west_point_grey != 'false' %}checked{% endif %} value="west_point_grey"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">West Point Grey</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox13" class="ads_Checkbox" type="checkbox" {% if kitsilano != 'false' %}checked{% endif %} value="kitsilano"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Kitsilano</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox14" class="ads_Checkbox" type="checkbox" {% if marpole != 'false' %}checked{% endif %} value="marpole"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Marpole</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox15" class="ads_Checkbox" type="checkbox" {% if mount_pleasant != 'false' %}checked{% endif %} value="mount_pleasant"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Mount Pleasant</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox16" class="ads_Checkbox" type="checkbox" {% if oakridge != 'false' %}checked{% endif %} value="oakridge"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Oakridge</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox17" class="ads_Checkbox" type="checkbox" {% if south_cambie != 'false' %}checked{% endif %} value="south_cambie"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">South Cambie</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox18" class="ads_Checkbox" type="checkbox" {% if renfrew_collingwood != 'false' %}checked{% endif %} value="renfrew_collingwood"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Renfrew-Collingwood</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox19" class="ads_Checkbox" type="checkbox" {% if riley_little_mountain != 'false' %}checked{% endif %} value="riley_little_mountain"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Riley-Little Mountain</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox20" class="ads_Checkbox" type="checkbox" {% if shaughnessy != 'false' %}checked{% endif %} value="shaughnessy"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Shaughnessy</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox21" class="ads_Checkbox" type="checkbox" {% if strathcona != 'false' %}checked{% endif %} value="strathcona"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Strathcona</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox22" class="ads_Checkbox" type="checkbox" {% if sunset != 'false' %}checked{% endif %} value="sunset"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Sunset</label><br>
+
+        <label class="Checkbox">
+            <input id="ad_Checkbox23" class="ads_Checkbox" type="checkbox" {% if victoria_fraserview != 'false' %}checked{% endif %} value="victoria_fraserview"/><span class="spanbox"></span></label>
+        <label class="namelabel" for="chkbox">Victoria-Fraserview</label><br>
+    </p>
+    <label id="selectall" for="chkbox"></label>
+    <label class="selectall">
+        <input type="checkbox" id="checkAll"/><span>Select All</span></label>
+    <input type="button" id="apply_filters" name="apply_filters" value="Apply Filters"/>
+    <input type="button" id="apply_map_filters" name="apply_map_filters" value="Apply Filters"/>
+    <script>
+        $("#checkAll").change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        });
+
+        $('#apply_filters').click(function () {
+            var my_filters = $('input[type=checkbox]:checked').map(function (_, el) {
+
+                return $(el).val();
+            }).get();
+
+            var filters = {
+                'favorite' :false, 'washroom':false,
+                'arbutus_ridge':false, 'downtown':false, 'west_end':false,
+                'dunbar_southlands':false, 'fairview':false,'grandview_woodland':false,
+                'hastings_sunrise':false, 'kensington_cedar_cottage':false, 'kerrisdale':false,
+                'killarney':false, 'west_point_grey':false, 'kitsilano':false,
+                'marpole':false, 'mount_pleasant':false,'oakridge':false,
+                'south_cambie':false, 'renfrew_collingwood':false, 'riley_little_mountain':false,
+                'shaughnessy':false, 'strathcona':false, 'sunset':false, 'victoria_fraserview':false,
+                'map' : false
+            };
+
+            for (key in my_filters){
+                filters[my_filters[key]] = true;
+            }
+
+            var params = $.param( filters );
+            window.location = "?" + params;
+
+        });
+        $('#apply_map_filters').click(function () {
+            var my_filters = $('input[type=checkbox]:checked').map(function (_, el) {
+
+                return $(el).val();
+            }).get();
+
+            var filters = {
+                'favorite' :false, 'washroom':false,
+                'arbutus_ridge':false, 'downtown':false, 'west_end':false,
+                'dunbar_southlands':false, 'fairview':false,'grandview_woodland':false,
+                'hastings_sunrise':false, 'kensington_cedar_cottage':false, 'kerrisdale':false,
+                'killarney':false, 'west_point_grey':false, 'kitsilano':false,
+                'marpole':false, 'mount_pleasant':false,'oakridge':false,
+                'south_cambie':false, 'renfrew_collingwood':false, 'riley_little_mountain':false,
+                'shaughnessy':false, 'strathcona':false, 'sunset':false, 'victoria_fraserview':false,
+                'map' : true
+            };
+
+            for (key in my_filters){
+                filters[my_filters[key]] = true;
+            }
+
+            var params = $.param( filters );
+            window.location = "?" + params;
+
+        })
+    </script>
+    <script src="{% static "parks/park-ajax.js" %}"></script>
+{#</div>#}

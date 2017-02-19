@@ -1,0 +1,267 @@
+.categorycontainer {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #E4E4E4;
+    overflow: hidden;
+    width: 100%;
+}
+
+.categoryswitcher {
+    padding-left: 10px;
+    overflow: hidden;
+    
+}
+
+.btcontainer {
+    display: inline-block;
+}
+
+#listcontainer {
+    width: 70px;
+}
+
+#mapcontainer {
+    width: 130px;
+}
+
+.parknamecontainer {
+	width: 100px;
+}
+
+.parkidcontainer {
+	width: 70px;
+}
+
+.parkratingcontainer {
+	width: 100px;
+}
+
+.filterbt {
+    float: left;
+    text-decoration: none;
+    font-weight: 100;
+    margin-left: 20px;
+    font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+    color: #222;
+
+}
+
+.filterbt:hover {
+    text-decoration: none;
+    border-bottom: 2px solid;
+    border-color: #222;
+    font-weight: 100;
+    font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+    color: #222;
+}
+
+
+
+#selected {
+    margin: 3px;
+    text-decoration: none;
+    border-bottom: 2px solid;
+    border-color: #009000;
+    font-weight: 700;
+    margin-left: 20px;
+    font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+    color: #222;
+}
+
+
+.label {
+    display: inline;
+    color: #AEAEAE;
+    font-size: 12px;
+    font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+}
+
+.info {
+    display: inline;
+    font-size: 15px;
+    font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+}
+
+
+table, caption, tbody, tfoot, thead, tr, th, td {
+	table-layout: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    clear: both;
+}
+
+table {
+	width: 100%;
+}
+
+#parkname {
+    display: inline-block;
+    font-size: 20px;
+    text-decoration: none;
+    color: #006300;
+    font-weight: 900;
+    font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+}
+
+.parkid {
+	font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+	display: inline-block;
+    font-size: 18px;
+}
+#parkname:hover {
+
+    font-size: 20px;
+    text-decoration: underline;
+    color: #006300;
+    font-weight: 900;
+    font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+}
+
+.mainrow {
+	width: 100%;
+	padding-bottom: 20px;
+	border-bottom: 2px solid #fafafa;
+}
+
+.sortbt {
+	text-decoration: none;
+	font-weight: normal;
+	font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+	margin-right: 10px;
+	color: #AEAEAE;
+	padding: 1px;
+}
+
+.none {
+	display: none;
+}
+
+
+#selectedsort {
+	color: #000;
+	box-shadow: inset 0 0 5px 2px #ddd;
+	border: 1px solid #C9C9C9;
+	border-radius: 5px;
+}
+
+#selectedsort:active {
+	box-shadow: inset 0 0 7px 5px #ddd;
+	border: 1px solid #C9C9C9;
+	border-radius: 5px;
+}
+
+.sortbt:hover {
+	box-shadow: 0 0 5px 2px #ddd;
+	border: 1px solid #C9C9C9;
+	border-radius: 5px;
+}
+
+.sortbt:active {
+	box-shadow: inset 0 0 7px 5px #ddd;
+	border: 1px solid #C9C9C9;
+	border-radius: 5px;
+}
+.sortby {
+	text-indent: 11px;
+	font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+	margin-bottom: 2px;
+
+}
+
+.sort {
+	height: 40px;
+	width: 100%;
+	float: left;
+	border-bottom: 1px solid #C9C9C9;
+}
+
+.neighbourhood {
+    padding: 1px;
+    text-decoration: none;
+    color: #000;
+    display: inline-block;
+    font-size: 15px;
+    font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+    line-height: 100%;
+    border-bottom: 1px solid #fff;
+}
+
+
+.neighbourhood:hover {
+    border-bottom: 1px dotted #000;
+    text-decoration: none;
+}
+
+.parks {
+	background: #fff ;
+  max-width: 900px ;
+  display: block; 
+  margin-left: auto ;
+  margin-right: auto ;
+}
+.list {
+	vertical-align: top;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    display: inline-block;
+}
+/* tables */
+/*
+table.tablesorter {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 8pt;
+	padding: 4px;
+}
+table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8dbdd8;
+}
+/* end tables */
+
+
+
+#namelink {
+	text-decoration: none;
+	color: #000;
+	font-family: "Helvetica Neue","Segoe UI",Arial,sans-serif;
+	text-transform: uppercase;
+}
+
+#namelink:hover {
+	border-bottom: 1px #000 dotted;
+}

@@ -1,0 +1,15 @@
+{% include "parks/base.html" %}
+<title>Create Account</title>
+<div style="margin-top:50px;">
+    {% if user.is_authenticated %}
+        <p>You are already logged in. Please log out if you wish to create a new account.</p>
+    {% else %}
+        <form method="post" action="">
+            {% csrf_token %}
+            <table>
+            {{ form.as_table }}
+            </table>
+        <input type="submit" class="btn" value="Create new user account"/>
+    </form>
+    {% endif %}
+</div>
